@@ -9,6 +9,7 @@ import { User } from '@supabase/supabase-js';
 import { LogOut, FileText, Users, Newspaper, Settings } from 'lucide-react';
 import NewsManagement from '@/components/NewsManagement';
 import PublicationsManagement from '@/components/PublicationsManagement';
+import ReportsManagement from '@/components/ReportsManagement';
 
 export default function Admin() {
   const [user, setUser] = useState<User | null>(null);
@@ -152,17 +153,7 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="reports">
-            <Card>
-              <CardHeader>
-                <CardTitle>Управление на доклади</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Тук ще можете да добавяте, редактирате и изтривате доклади.</p>
-                <div className="mt-4">
-                  <Button>Добави нов доклад</Button>
-                </div>
-              </CardContent>
-            </Card>
+            <ReportsManagement />
           </TabsContent>
 
           <TabsContent value="publications">
