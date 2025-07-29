@@ -8,6 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { User } from '@supabase/supabase-js';
 import { LogOut, FileText, Users, Newspaper, Settings } from 'lucide-react';
 import NewsManagement from '@/components/NewsManagement';
+import PublicationsManagement from '@/components/PublicationsManagement';
 
 export default function Admin() {
   const [user, setUser] = useState<User | null>(null);
@@ -165,17 +166,7 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="publications">
-            <Card>
-              <CardHeader>
-                <CardTitle>Управление на публикации</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Тук ще можете да добавяте, редактирате и изтривате публикации.</p>
-                <div className="mt-4">
-                  <Button>Добави нова публикация</Button>
-                </div>
-              </CardContent>
-            </Card>
+            <PublicationsManagement />
           </TabsContent>
 
           <TabsContent value="members">
