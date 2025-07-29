@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Shield, BarChart3, FileText, ChevronRight, Calendar, ArrowRight, Users, TrendingUp, Award, Building } from "lucide-react";
 import heroParliament from "/lovable-uploads/d2924a0c-eb84-41bc-993d-d5c8c0840d0d.png";
 import heroGovernment from "/lovable-uploads/aa0da3ae-e708-4c56-992d-df2b19cb0f08.png";
+import heroBuilding from "/lovable-uploads/cc69f144-c0b7-4c82-95b6-6f4b808c8763.png";
 import roleGovernance from "@/assets/role-governance.jpg";
 import roleOversight from "@/assets/role-oversight.jpg";
 import roleProfessional from "@/assets/role-professional.jpg";
@@ -15,7 +16,7 @@ import newsBackground from "@/assets/news-background.jpg";
 const Home = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   
-  const heroImages = [heroParliament, heroGovernment];
+  const heroImages = [heroParliament, heroGovernment, heroBuilding];
   
   const roleImages = [roleGovernance, roleOversight, roleProfessional];
 
