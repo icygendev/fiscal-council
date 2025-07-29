@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,30 +18,31 @@ import fiscalCouncilLogo from "/lovable-uploads/113eeab5-8568-4061-9f4e-7dfdc2c8
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   const navItems = [
-    { name: "Начало", path: "/" },
+    { name: t("Начало", "Home"), path: "/" },
     { 
-      name: "Фискален съвет", 
+      name: t("Фискален съвет", "Fiscal Council"), 
       subItems: [
-        { name: "Мисия и цели", path: "/mission" },
+        { name: t("Мисия и цели", "Mission & Goals"), path: "/mission" },
         { 
-          name: "Структура", 
+          name: t("Структура", "Structure"), 
           path: "/structure",
           subItems: [
-            { name: "Членове", path: "/council-members" },
-            { name: "Експертен съвет", path: "/expert-council" }
+            { name: t("Членове", "Members"), path: "/council-members" },
+            { name: t("Експертен съвет", "Expert Council"), path: "/expert-council" }
           ]
         },
-        { name: "История", path: "/history" }
+        { name: t("История", "History"), path: "/history" }
       ]
     },
-    { name: "Новини", path: "/news" },
-    { name: "Доклади", path: "/reports" },
-    { name: "Публикации", path: "/publications" },
-    { name: "Нормативна база", path: "/regulatory-framework" },
-    { name: "Контакти", path: "/contacts" },
-    { name: "Вход", path: "/auth" },
+    { name: t("Новини", "News"), path: "/news" },
+    { name: t("Доклади", "Reports"), path: "/reports" },
+    { name: t("Публикации", "Publications"), path: "/publications" },
+    { name: t("Нормативна база", "Regulatory Framework"), path: "/regulatory-framework" },
+    { name: t("Контакти", "Contacts"), path: "/contacts" },
+    { name: t("Вход", "Login"), path: "/auth" },
   ];
 
   const isActivePath = (path: string) => {
@@ -70,16 +73,17 @@ const Header = () => {
             />
             <div className="flex flex-col">
               <h1 className="text-lg font-bold text-primary leading-tight">
-                Фискален съвет
+                {t("Фискален съвет", "Fiscal Council")}
               </h1>
               <p className="text-sm text-muted-foreground leading-tight">
-                на България
+                {t("на България", "of Bulgaria")}
               </p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
+            <nav className="flex items-center space-x-8">
             {navItems.map((item) => (
               item.subItems ? (
                 <DropdownMenu key={item.name}>
@@ -149,17 +153,21 @@ const Header = () => {
                 </Link>
               )
             ))}
-          </nav>
+            </nav>
+            <LanguageToggle />
+          </div>
 
           {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
+          <div className="md:hidden flex items-center space-x-2">
+            <LanguageToggle />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
