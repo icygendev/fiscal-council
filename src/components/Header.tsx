@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import fiscalCouncilLogo from "@/assets/fiscal-council-logo.png";
+import fiscalCouncilLogo from "/lovable-uploads/4998c9dd-97e1-43b8-93ed-7cf0370f4047.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
