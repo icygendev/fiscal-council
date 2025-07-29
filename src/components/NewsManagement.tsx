@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { Plus, Edit2, Trash2, Calendar, Eye } from 'lucide-react';
+import { Plus, Edit2, Trash2, Calendar, Eye, Download } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -198,6 +198,27 @@ export default function NewsManagement() {
     }
   };
 
+  const handleImportNews = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('add-fiscal-council-news');
+      
+      if (error) throw error;
+      
+      toast({
+        title: "Успех",
+        description: `Успешно добавени ${data.added} новини от Фискалния съвет!`,
+      });
+      
+      fetchNews();
+    } catch (error: any) {
+      toast({
+        title: "Грешка",
+        description: "Неуспешно импортиране на новините: " + error.message,
+        variant: "destructive",
+      });
+    }
+  };
+
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "доклад": return "bg-blue-100 text-blue-800";
@@ -223,14 +244,19 @@ export default function NewsManagement() {
           <h2 className="text-3xl font-bold tracking-tight">Управление на новини</h2>
           <p className="text-muted-foreground">Създавайте и управлявайте новини, доклади и съобщения</p>
         </div>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={resetForm}>
-              <Plus className="h-4 w-4 mr-2" />
-              Добави новина
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={handleImportNews}>
+            <Download className="h-4 w-4 mr-2" />
+            Импорт от fiscal-council.bg
+          </Button>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button onClick={resetForm}>
+                <Plus className="h-4 w-4 mr-2" />
+                Добави новина
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
                 {editingNews ? 'Редактиране на новина' : 'Добавяне на нова новина'}
@@ -362,6 +388,7 @@ export default function NewsManagement() {
             </form>
           </DialogContent>
         </Dialog>
+        </div>
       </div>
 
       <Card>
