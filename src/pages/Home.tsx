@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Shield, BarChart3, FileText, ChevronRight, Calendar, ArrowRight, Users, TrendingUp, Award, Building } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroParliament from "/lovable-uploads/d2924a0c-eb84-41bc-993d-d5c8c0840d0d.png";
 import heroGovernment from "/lovable-uploads/aa0da3ae-e708-4c56-992d-df2b19cb0f08.png";
 import heroBuilding from "/lovable-uploads/cc69f144-c0b7-4c82-95b6-6f4b808c8763.png";
@@ -14,6 +15,7 @@ import roleProfessional from "@/assets/role-professional.jpg";
 import newsBackground from "@/assets/news-background.jpg";
 
 const Home = () => {
+  const { t } = useLanguage();
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   
   const heroImages = [heroParliament, heroGovernment, heroBuilding];
@@ -24,26 +26,26 @@ const Home = () => {
     {
       icon: Building,
       value: "5",
-      label: "Години опит",
-      description: "в анализ на фискалната политика"
+      label: t("Години опит", "Years of Experience"),
+      description: t("в анализ на фискалната политика", "in fiscal policy analysis")
     },
     {
       icon: FileText,
       value: "50+",
-      label: "Публикувани доклада",
-      description: "и становища към правителството"
+      label: t("Публикувани доклада", "Published Reports"),
+      description: t("и становища към правителството", "and opinions to the government")
     },
     {
       icon: TrendingUp,
       value: "95%",
-      label: "Точност на прогнозите",
-      description: "при анализ на бюджетните параметри"
+      label: t("Точност на прогнозите", "Forecast Accuracy"),
+      description: t("при анализ на бюджетните параметри", "in budget parameter analysis")
     },
     {
       icon: Award,
       value: "100%",
-      label: "Независимост",
-      description: "в оценката на публичните финанси"
+      label: t("Независимост", "Independence"),
+      description: t("в оценката на публичните финанси", "in public finance assessment")
     }
   ];
 
@@ -58,39 +60,39 @@ const Home = () => {
   const coreValues = [
     {
       icon: Shield,
-      title: "Независим мониторинг",
-      description: "Безпристрастна оценка на фискалната политика и бюджетни прогнози"
+      title: t("Независим мониторинг", "Independent Monitoring"),
+      description: t("Безпристрастна оценка на фискалната политика и бюджетни прогнози", "Impartial assessment of fiscal policy and budget forecasts")
     },
     {
       icon: BarChart3,
-      title: "Оценка на прогнози",
-      description: "Анализ на макроикономическите прогнози и фискалните проекции"
+      title: t("Оценка на прогнози", "Forecast Evaluation"),
+      description: t("Анализ на макроикономическите прогнози и фискалните проекции", "Analysis of macroeconomic forecasts and fiscal projections")
     },
     {
       icon: FileText,
-      title: "Публичност и отчетност",
-      description: "Прозрачно представяне на анализи и становища пред обществото"
+      title: t("Публичност и отчетност", "Transparency and Accountability"),
+      description: t("Прозрачно представяне на анализи и становища пред обществото", "Transparent presentation of analyses and opinions to the public")
     }
   ];
 
   const latestNews = [
     {
-      title: "Становище относно актуализацията на бюджета за 2024 година",
-      date: "15 юли 2024",
-      excerpt: "Фискалният съвет анализира предложените промени в държавния бюджет и техните възможни последици за фискалната устойчивост.",
-      category: "Становище"
+      title: t("Становище относно актуализацията на бюджета за 2024 година", "Opinion on the 2024 Budget Update"),
+      date: t("15 юли 2024", "July 15, 2024"),
+      excerpt: t("Фискалният съвет анализира предложените промени в държавния бюджет и техните възможни последици за фискалната устойчивост.", "The Fiscal Council analyzes the proposed changes to the state budget and their potential consequences for fiscal sustainability."),
+      category: t("Становище", "Opinion")
     },
     {
-      title: "Доклад за изпълнението на бюджета за първото полугодие",
-      date: "28 юни 2024", 
-      excerpt: "Детайлен анализ на постигнатите резултати при изпълнението на държавния бюджет през първите шест месеца от годината.",
-      category: "Доклад"
+      title: t("Доклад за изпълнението на бюджета за първото полугодие", "Report on Budget Execution for the First Half of the Year"),
+      date: t("28 юни 2024", "June 28, 2024"), 
+      excerpt: t("Детайлен анализ на постигнатите резултати при изпълнението на държавния бюджет през първите шест месеца от годината.", "Detailed analysis of the results achieved in the execution of the state budget during the first six months of the year."),
+      category: t("Доклад", "Report")
     },
     {
-      title: "Оценка на макроикономическите прогнози за 2024-2026",
-      date: "10 май 2024",
-      excerpt: "Анализ на прогнозите за икономическо развитие и тяхното въздействие върху публичните финанси.",
-      category: "Анализ"
+      title: t("Оценка на макроикономическите прогнози за 2024-2026", "Assessment of Macroeconomic Forecasts for 2024-2026"),
+      date: t("10 май 2024", "May 10, 2024"),
+      excerpt: t("Анализ на прогнозите за икономическо развитие и тяхното въздействие върху публичните финанси.", "Analysis of economic development forecasts and their impact on public finances."),
+      category: t("Анализ", "Analysis")
     }
   ];
 
@@ -117,35 +119,35 @@ const Home = () => {
         <div className="relative container mx-auto px-4 py-20 md:py-32">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Фискален съвет на България
+              {t("Фискален съвет на България", "Fiscal Council of Bulgaria")}
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90">
-              Обективност, прозрачност и фискална устойчивост
+              {t("Обективност, прозрачност и фискална устойчивост", "Objectivity, transparency and fiscal sustainability")}
             </p>
             <div className="flex flex-wrap gap-4 mb-8">
               <Badge variant="secondary" className="text-sm px-4 py-2 bg-white/20 text-white border-white/30">
-                Независимост
+                {t("Независимост", "Independence")}
               </Badge>
               <Badge variant="secondary" className="text-sm px-4 py-2 bg-white/20 text-white border-white/30">
-                Прозрачност
+                {t("Прозрачност", "Transparency")}
               </Badge>
               <Badge variant="secondary" className="text-sm px-4 py-2 bg-white/20 text-white border-white/30">
-                Устойчивост
+                {t("Устойчивост", "Sustainability")}
               </Badge>
             </div>
             <p className="text-lg mb-8 text-white/80">
-              Анализираме бюджета безпристрастно и предоставяме независими оценки на фискалната политика
+              {t("Анализираме бюджета безпристрастно и предоставяме независими оценки на фискалната политика", "We analyze the budget impartially and provide independent assessments of fiscal policy")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" variant="secondary" asChild>
                 <Link to="/about">
-                  Научете повече за нас
+                  {t("Научете повече за нас", "Learn more about us")}
                   <ChevronRight className="ml-2" size={16} />
                 </Link>
               </Button>
               <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
                 <Link to="/reports">
-                  Прегледайте докладите
+                  {t("Прегледайте докладите", "View Reports")}
                 </Link>
               </Button>
             </div>
@@ -157,10 +159,10 @@ const Home = () => {
       <section className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Нашата роля
+            {t("Нашата роля", "Our Role")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Като независим орган осигуряваме обективен анализ и оценка на фискалната политика
+            {t("Като независим орган осигуряваме обективен анализ и оценка на фискалната политика", "As an independent body, we provide objective analysis and assessment of fiscal policy")}
           </p>
         </div>
         
@@ -195,10 +197,10 @@ const Home = () => {
       <section className="container mx-auto px-4 py-16 bg-gradient-to-r from-primary/5 to-primary-dark/5">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Нашите постижения
+            {t("Нашите постижения", "Our Achievements")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Статистики, които отразяват нашия професионализъм и качество на работа
+            {t("Статистики, които отразяват нашия професионализъм и качество на работа", "Statistics that reflect our professionalism and quality of work")}
           </p>
         </div>
         
@@ -229,15 +231,15 @@ const Home = () => {
         <div className="flex justify-between items-center mb-12">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-              Последни новини
+              {t("Последни новини", "Latest News")}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Актуална информация за дейността на Фискалния съвет
+              {t("Актуална информация за дейността на Фискалния съвет", "Current information about the activities of the Fiscal Council")}
             </p>
           </div>
           <Button variant="outline" asChild className="hidden md:inline-flex">
             <Link to="/news">
-              Всички новини
+              {t("Всички новини", "All News")}
               <ArrowRight className="ml-2" size={16} />
             </Link>
           </Button>
@@ -265,7 +267,7 @@ const Home = () => {
                   {news.excerpt}
                 </CardDescription>
                 <Button variant="ghost" size="sm" className="p-0 h-auto font-medium text-primary">
-                  Прочети още
+                  {t("Прочети още", "Read more")}
                   <ChevronRight className="ml-1" size={14} />
                 </Button>
               </CardContent>
@@ -276,7 +278,7 @@ const Home = () => {
         <div className="text-center mt-8 md:hidden">
           <Button variant="outline" asChild>
             <Link to="/news">
-              Всички новини
+              {t("Всички новини", "All News")}
               <ArrowRight className="ml-2" size={16} />
             </Link>
           </Button>
@@ -288,14 +290,14 @@ const Home = () => {
         <Card className="bg-gradient-to-r from-primary to-primary-dark text-white border-0">
           <CardContent className="p-8 md:p-12 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Виж всички доклади и анализи
+              {t("Виж всички доклади и анализи", "View All Reports and Analyses")}
             </h2>
             <p className="text-lg mb-8 text-white/90 max-w-2xl mx-auto">
-              Получете достъп до цялостните анализи, доклади и становища на Фискалния съвет
+              {t("Получете достъп до цялостните анализи, доклади и становища на Фискалния съвет", "Get access to comprehensive analyses, reports and opinions of the Fiscal Council")}
             </p>
             <Button size="lg" variant="secondary" asChild>
               <Link to="/reports">
-                Прегледайте докладите
+                {t("Прегледайте докладите", "View Reports")}
                 <FileText className="ml-2" size={16} />
               </Link>
             </Button>
