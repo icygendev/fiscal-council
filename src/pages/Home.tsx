@@ -5,10 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Shield, BarChart3, FileText, ChevronRight, Calendar, ArrowRight, Users, TrendingUp, Award, Building } from "lucide-react";
-import heroParliament from "@/assets/hero-parliament.jpg";
-import heroAssembly from "/lovable-uploads/c67e2ed1-f52d-4df5-b447-4eeb55753a1a.png";
-import heroGovernment from "/lovable-uploads/94048199-155e-4ab7-8321-6261b4acefdc.png"; 
-import heroPresidency from "@/assets/hero-presidency.jpg";
+import heroParliament from "/lovable-uploads/d2924a0c-eb84-41bc-993d-d5c8c0840d0d.png";
+import heroGovernment from "/lovable-uploads/aa0da3ae-e708-4c56-992d-df2b19cb0f08.png";
 import roleGovernance from "@/assets/role-governance.jpg";
 import roleOversight from "@/assets/role-oversight.jpg";
 import roleProfessional from "@/assets/role-professional.jpg";
@@ -17,7 +15,7 @@ import newsBackground from "@/assets/news-background.jpg";
 const Home = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   
-  const heroImages = [heroParliament, heroAssembly, heroGovernment, heroPresidency];
+  const heroImages = [heroParliament, heroGovernment];
   
   const roleImages = [roleGovernance, roleOversight, roleProfessional];
 
