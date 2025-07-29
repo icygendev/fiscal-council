@@ -20,7 +20,8 @@ const Header = () => {
       name: "Фискален съвет", 
       subItems: [
         { name: "Мисия и цели", path: "/mission" },
-        { name: "Структура", path: "/structure" },
+        { name: "Членове на фискалния съвет", path: "/council-members" },
+        { name: "Експертен съвет", path: "/expert-council" },
         { name: "История", path: "/history" }
       ]
     },

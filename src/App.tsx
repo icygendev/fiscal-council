@@ -7,7 +7,8 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Mission from "./pages/Mission";
-import Structure from "./pages/Structure";
+import CouncilMembers from "./pages/CouncilMembers";
+import ExpertCouncil from "./pages/ExpertCouncil";
 import History from "./pages/History";
 import News from "./pages/News";
 import Reports from "./pages/Reports";
@@ -29,7 +30,8 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/mission" element={<Mission />} />
-            <Route path="/structure" element={<Structure />} />
+            <Route path="/council-members" element={<CouncilMembers />} />
+            <Route path="/expert-council" element={<ExpertCouncil />} />
             <Route path="/history" element={<History />} />
             <Route path="/news" element={<News />} />
             <Route path="/reports" element={<Reports />} />
