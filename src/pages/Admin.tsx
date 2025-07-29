@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { User } from '@supabase/supabase-js';
 import { LogOut, FileText, Users, Newspaper, Settings } from 'lucide-react';
+import { AnimatedCounter } from '@/components/AnimatedCounter';
 import NewsManagement from '@/components/NewsManagement';
 import PublicationsManagement from '@/components/PublicationsManagement';
 import ReportsManagement from '@/components/ReportsManagement';
@@ -14,6 +15,12 @@ import ReportsManagement from '@/components/ReportsManagement';
 export default function Admin() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [counts, setCounts] = useState({
+    news: 0,
+    reports: 0,
+    publications: 0,
+    members: 0
+  });
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -27,6 +34,9 @@ export default function Admin() {
       }
       setUser(session.user);
       setLoading(false);
+      
+      // Fetch counts
+      await fetchCounts();
     };
 
     checkAuth();
@@ -38,11 +48,32 @@ export default function Admin() {
       } else {
         setUser(session.user);
         setLoading(false);
+        fetchCounts();
       }
     });
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  const fetchCounts = async () => {
+    try {
+      const [newsResult, reportsResult, publicationsResult, membersResult] = await Promise.all([
+        supabase.from('news').select('id', { count: 'exact', head: true }),
+        supabase.from('reports').select('id', { count: 'exact', head: true }),
+        supabase.from('publications').select('id', { count: 'exact', head: true }),
+        supabase.from('members').select('id', { count: 'exact', head: true })
+      ]);
+
+      setCounts({
+        news: newsResult.count || 0,
+        reports: reportsResult.count || 0,
+        publications: publicationsResult.count || 0,
+        members: membersResult.count || 0
+      });
+    } catch (error) {
+      console.error('Error fetching counts:', error);
+    }
+  };
 
   const handleSignOut = async () => {
     try {
@@ -108,7 +139,7 @@ export default function Admin() {
                   <Newspaper className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">0</div>
+                  <AnimatedCounter value={counts.news.toString()} className="text-2xl font-bold" />
                   <p className="text-xs text-muted-foreground">публикувани статии</p>
                 </CardContent>
               </Card>
@@ -119,7 +150,7 @@ export default function Admin() {
                   <FileText className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">0</div>
+                  <AnimatedCounter value={counts.reports.toString()} className="text-2xl font-bold" />
                   <p className="text-xs text-muted-foreground">публикувани доклади</p>
                 </CardContent>
               </Card>
@@ -130,7 +161,7 @@ export default function Admin() {
                   <FileText className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">0</div>
+                  <AnimatedCounter value={counts.publications.toString()} className="text-2xl font-bold" />
                   <p className="text-xs text-muted-foreground">публикувани документи</p>
                 </CardContent>
               </Card>
@@ -141,7 +172,7 @@ export default function Admin() {
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">0</div>
+                  <AnimatedCounter value={counts.members.toString()} className="text-2xl font-bold" />
                   <p className="text-xs text-muted-foreground">активни членове</p>
                 </CardContent>
               </Card>
