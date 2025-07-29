@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -209,7 +210,9 @@ const Home = () => {
                 <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <AnimatedCounter value={stat.value} duration={2500} />
+                </div>
                 <div className="text-lg font-semibold text-primary/80 mb-1">{stat.label}</div>
                 <div className="text-sm text-muted-foreground">{stat.description}</div>
               </CardContent>
