@@ -19,6 +19,7 @@ export type Database = {
           active: boolean
           biography_bg: string | null
           biography_en: string | null
+          category: string
           created_at: string
           id: string
           name_bg: string
@@ -33,6 +34,7 @@ export type Database = {
           active?: boolean
           biography_bg?: string | null
           biography_en?: string | null
+          category?: string
           created_at?: string
           id?: string
           name_bg: string
@@ -47,6 +49,7 @@ export type Database = {
           active?: boolean
           biography_bg?: string | null
           biography_en?: string | null
+          category?: string
           created_at?: string
           id?: string
           name_bg?: string

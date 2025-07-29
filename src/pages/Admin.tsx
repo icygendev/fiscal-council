@@ -11,6 +11,7 @@ import { AnimatedCounter } from '@/components/AnimatedCounter';
 import NewsManagement from '@/components/NewsManagement';
 import PublicationsManagement from '@/components/PublicationsManagement';
 import ReportsManagement from '@/components/ReportsManagement';
+import MembersManagement from '@/components/MembersManagement';
 
 export default function Admin() {
   const [user, setUser] = useState<User | null>(null);
@@ -192,17 +193,7 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="members">
-            <Card>
-              <CardHeader>
-                <CardTitle>Управление на членове</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Тук ще можете да добавяте, редактирате и изтривате информация за членовете на съвета.</p>
-                <div className="mt-4">
-                  <Button>Добави нов член</Button>
-                </div>
-              </CardContent>
-            </Card>
+            <MembersManagement />
           </TabsContent>
         </Tabs>
       </div>
