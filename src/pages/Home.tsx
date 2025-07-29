@@ -1,11 +1,59 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Shield, BarChart3, FileText, ChevronRight, Calendar, ArrowRight } from "lucide-react";
+import { Shield, BarChart3, FileText, ChevronRight, Calendar, ArrowRight, Users, TrendingUp, Award, Building } from "lucide-react";
 import heroParliament from "@/assets/hero-parliament.jpg";
+import heroBuilding from "@/assets/hero-building.jpg";
+import heroBridge from "@/assets/hero-bridge.jpg";
+import roleTechnology from "@/assets/role-technology.jpg";
+import roleAnalysis from "@/assets/role-analysis.jpg";
+import roleProfessional from "@/assets/role-professional.jpg";
+import newsBackground from "@/assets/news-background.jpg";
 
 const Home = () => {
+  const [currentHeroImage, setCurrentHeroImage] = useState(0);
+  
+  const heroImages = [heroParliament, heroBuilding, heroBridge];
+  
+  const roleImages = [roleTechnology, roleAnalysis, roleProfessional];
+
+  const stats = [
+    {
+      icon: Building,
+      value: "5",
+      label: "Години опит",
+      description: "в анализ на фискалната политика"
+    },
+    {
+      icon: FileText,
+      value: "50+",
+      label: "Публикувани доклада",
+      description: "и становища към правителството"
+    },
+    {
+      icon: TrendingUp,
+      value: "95%",
+      label: "Точност на прогнозите",
+      description: "при анализ на бюджетните параметри"
+    },
+    {
+      icon: Award,
+      value: "100%",
+      label: "Независимост",
+      description: "в оценката на публичните финанси"
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   const coreValues = [
     {
       icon: Shield,
@@ -50,9 +98,21 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary/90 to-primary-dark/90 text-white overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-          style={{ backgroundImage: `url(${heroParliament})` }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 transition-all duration-1000"
+          style={{ backgroundImage: `url(${heroImages[currentHeroImage]})` }}
         />
+        {/* Hero image indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentHeroImage(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentHeroImage ? 'bg-white' : 'bg-white/50 hover:bg-white/70'
+              }`}
+            />
+          ))}
+        </div>
         <div className="relative container mx-auto px-4 py-20 md:py-32">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -82,7 +142,7 @@ const Home = () => {
                   <ChevronRight className="ml-2" size={16} />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" asChild>
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
                 <Link to="/reports">
                   Прегледайте докладите
                 </Link>
@@ -105,11 +165,19 @@ const Home = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {coreValues.map((value, index) => (
-            <Card key={index} className="text-center group hover:shadow-lg transition-all duration-300 border-border/50">
-              <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+            <Card key={index} className="text-center group hover:shadow-lg transition-all duration-300 border-border/50 overflow-hidden">
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={roleImages[index]} 
+                  alt={value.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <value.icon className="w-8 h-8 text-white" />
                 </div>
+              </div>
+              <CardHeader>
                 <CardTitle className="text-xl text-primary">{value.title}</CardTitle>
               </CardHeader>
               <CardContent>
@@ -122,8 +190,39 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Statistics Section */}
+      <section className="container mx-auto px-4 py-16 bg-gradient-to-r from-primary/5 to-primary-dark/5">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            Нашите постижения
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Статистики, които отразяват нашия професионализъм и качество на работа
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
+            <Card key={index} className="text-center group hover:shadow-lg transition-all duration-300 bg-white/70 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <stat.icon className="w-8 h-8 text-white" />
+                </div>
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-lg font-semibold text-primary/80 mb-1">{stat.label}</div>
+                <div className="text-sm text-muted-foreground">{stat.description}</div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
       {/* Latest News */}
-      <section className="container mx-auto px-4 py-16 bg-muted/30">
+      <section className="relative container mx-auto px-4 py-16">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-5"
+          style={{ backgroundImage: `url(${newsBackground})` }}
+        />
         <div className="flex justify-between items-center mb-12">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
