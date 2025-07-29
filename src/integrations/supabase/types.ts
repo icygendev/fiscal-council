@@ -14,7 +14,177 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      members: {
+        Row: {
+          active: boolean
+          biography_bg: string | null
+          biography_en: string | null
+          created_at: string
+          id: string
+          name_bg: string
+          name_en: string | null
+          order_index: number | null
+          photo_url: string | null
+          position_bg: string
+          position_en: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          biography_bg?: string | null
+          biography_en?: string | null
+          created_at?: string
+          id?: string
+          name_bg: string
+          name_en?: string | null
+          order_index?: number | null
+          photo_url?: string | null
+          position_bg: string
+          position_en?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          biography_bg?: string | null
+          biography_en?: string | null
+          created_at?: string
+          id?: string
+          name_bg?: string
+          name_en?: string | null
+          order_index?: number | null
+          photo_url?: string | null
+          position_bg?: string
+          position_en?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      news: {
+        Row: {
+          category: string
+          content_bg: string
+          content_en: string | null
+          created_at: string
+          excerpt_bg: string | null
+          excerpt_en: string | null
+          featured: boolean
+          id: string
+          image_url: string | null
+          published: boolean
+          title_bg: string
+          title_en: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          category?: string
+          content_bg: string
+          content_en?: string | null
+          created_at?: string
+          excerpt_bg?: string | null
+          excerpt_en?: string | null
+          featured?: boolean
+          id?: string
+          image_url?: string | null
+          published?: boolean
+          title_bg: string
+          title_en?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          category?: string
+          content_bg?: string
+          content_en?: string | null
+          created_at?: string
+          excerpt_bg?: string | null
+          excerpt_en?: string | null
+          featured?: boolean
+          id?: string
+          image_url?: string | null
+          published?: boolean
+          title_bg?: string
+          title_en?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          created_at: string
+          description_bg: string | null
+          description_en: string | null
+          document_url: string | null
+          id: string
+          keywords_bg: string[] | null
+          keywords_en: string[] | null
+          published: boolean
+          report_type: string
+          title_bg: string
+          title_en: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          description_bg?: string | null
+          description_en?: string | null
+          document_url?: string | null
+          id?: string
+          keywords_bg?: string[] | null
+          keywords_en?: string[] | null
+          published?: boolean
+          report_type?: string
+          title_bg: string
+          title_en?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          description_bg?: string | null
+          description_en?: string | null
+          document_url?: string | null
+          id?: string
+          keywords_bg?: string[] | null
+          keywords_en?: string[] | null
+          published?: boolean
+          report_type?: string
+          title_bg?: string
+          title_en?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          description: string | null
+          id: string
+          key: string
+          updated_at: string
+          value_bg: string | null
+          value_en: string | null
+        }
+        Insert: {
+          description?: string | null
+          id?: string
+          key: string
+          updated_at?: string
+          value_bg?: string | null
+          value_en?: string | null
+        }
+        Update: {
+          description?: string | null
+          id?: string
+          key?: string
+          updated_at?: string
+          value_bg?: string | null
+          value_en?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
