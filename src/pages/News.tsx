@@ -1,94 +1,95 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Search, Filter, ChevronRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface NewsItem {
+  id: string;
+  title_bg: string;
+  title_en?: string;
+  content_bg: string;
+  content_en?: string;
+  excerpt_bg?: string;
+  excerpt_en?: string;
+  category: string;
+  image_url?: string;
+  published: boolean;
+  featured: boolean;
+  created_at: string;
+  updated_at: string;
+}
 
 const News = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedYear, setSelectedYear] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const newsItems = [
-    {
-      id: 1,
-      title: "Становище относно актуализацията на бюджета за 2024 година",
-      date: "15 юли 2024",
-      category: "Становище",
-      excerpt: "Фискалният съвет анализира предложените промени в държавния бюджет и техните възможни последици за фискалната устойчивост. Основните изводи показват необходимост от по-консервативен подход при прогнозирането на приходите.",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop",
-      readTime: "5 мин"
-    },
-    {
-      id: 2,
-      title: "Доклад за изпълнението на бюджета за първото полугодие",
-      date: "28 юни 2024",
-      category: "Доклад",
-      excerpt: "Детайлен анализ на постигнатите резултати при изпълнението на държавния бюджет през първите шест месеца от годината. Отчетен е дефицит от 2.1% от БВП.",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=200&fit=crop",
-      readTime: "8 мин"
-    },
-    {
-      id: 3,
-      title: "Оценка на макроикономическите прогнози за 2024-2026",
-      date: "10 май 2024",
-      category: "Анализ",
-      excerpt: "Анализ на прогнозите за икономическо развитие и тяхното въздействие върху публичните финанси. Очаква се умерен ръст на БВП от 2.8% за 2024 година.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop",
-      readTime: "6 мин"
-    },
-    {
-      id: 4,
-      title: "Прессъобщение: Нова методология за оценка на фискалните рискове",
-      date: "22 април 2024",
-      category: "Прессъобщение",
-      excerpt: "Фискалният съвет въвежда обновена методология за идентифициране и оценка на основните фискални рискове за българската икономика.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop",
-      readTime: "3 мин"
-    },
-    {
-      id: 5,
-      title: "Становище по проекта за изменение на Закона за публичните финанси",
-      date: "5 март 2024",
-      category: "Становище",
-      excerpt: "Анализ и препоръки относно предложените промени в законодателството, касаещи управлението на публичните финанси и фискалните правила.",
-      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=200&fit=crop",
-      readTime: "7 мин"
-    },
-    {
-      id: 6,
-      title: "Годишен доклад за дейността на Фискалния съвет за 2023",
-      date: "15 февруари 2024",
-      category: "Доклад",
-      excerpt: "Цялостен преглед на дейността и постиженията на Фискалния съвет през изминалата година, включително основните анализи и становища.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop",
-      readTime: "12 мин"
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  const fetchNews = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('news')
+        .select('*')
+        .eq('published', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setNewsItems(data || []);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
-  const categories = ["Всички", "Доклад", "Становище", "Анализ", "Прессъобщение"];
-  const years = ["Всички години", "2024", "2023", "2022"];
+  const categories = ["Всички", "доклад", "становище", "анализ", "прессъобщение", "новини"];
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "Доклад": return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
-      case "Становище": return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
-      case "Анализ": return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200";
-      case "Прессъобщение": return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200";
+      case "доклад": return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
+      case "становище": return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+      case "анализ": return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200";
+      case "прессъобщение": return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200";
       default: return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
     }
   };
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('bg-BG', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   const filteredNews = newsItems.filter(item => {
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesYear = selectedYear === "all" || item.date.includes(selectedYear);
+    const matchesSearch = item.title_bg.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (item.excerpt_bg && item.excerpt_bg.toLowerCase().includes(searchTerm.toLowerCase()));
+    const itemYear = new Date(item.created_at).getFullYear().toString();
+    const matchesYear = selectedYear === "all" || itemYear === selectedYear;
     const matchesCategory = selectedCategory === "all" || item.category === selectedCategory;
     
     return matchesSearch && matchesYear && matchesCategory;
   });
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <p>Зареждане на новините...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -136,10 +137,11 @@ const News = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Всички категории</SelectItem>
-                  <SelectItem value="Доклад">Доклад</SelectItem>
-                  <SelectItem value="Становище">Становище</SelectItem>
-                  <SelectItem value="Анализ">Анализ</SelectItem>
-                  <SelectItem value="Прессъобщение">Прессъобщение</SelectItem>
+                  <SelectItem value="доклад">Доклад</SelectItem>
+                  <SelectItem value="становище">Становище</SelectItem>
+                  <SelectItem value="анализ">Анализ</SelectItem>
+                  <SelectItem value="прессъобщение">Прессъобщение</SelectItem>
+                  <SelectItem value="новини">Новини</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -160,8 +162,8 @@ const News = () => {
           <Card key={item.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
             <div className="aspect-video overflow-hidden">
               <img 
-                src={item.image} 
-                alt={item.title}
+                src={item.image_url || "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop"} 
+                alt={item.title_bg}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -175,20 +177,20 @@ const News = () => {
                 </Badge>
                 <div className="flex items-center text-sm text-muted-foreground">
                   <Calendar size={14} className="mr-1" />
-                  {item.date}
+                  {formatDate(item.created_at)}
                 </div>
               </div>
               <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors line-clamp-2">
-                {item.title}
+                {item.title_bg}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <CardDescription className="text-sm mb-4 line-clamp-3">
-                {item.excerpt}
+                {item.excerpt_bg || item.content_bg.substring(0, 150) + '...'}
               </CardDescription>
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">
-                  {item.readTime} четене
+                  {Math.ceil(item.content_bg.length / 1000)} мин четене
                 </span>
                 <Button variant="ghost" size="sm" className="p-0 h-auto font-medium text-primary">
                   Прочети още

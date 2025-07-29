@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { User } from '@supabase/supabase-js';
 import { LogOut, FileText, Users, Newspaper, Settings } from 'lucide-react';
+import NewsManagement from '@/components/NewsManagement';
 
 export default function Admin() {
   const [user, setUser] = useState<User | null>(null);
@@ -146,17 +147,7 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="news">
-            <Card>
-              <CardHeader>
-                <CardTitle>Управление на новини</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Тук ще можете да добавяте, редактирате и изтривате новини.</p>
-                <div className="mt-4">
-                  <Button>Добави нова новина</Button>
-                </div>
-              </CardContent>
-            </Card>
+            <NewsManagement />
           </TabsContent>
 
           <TabsContent value="reports">
