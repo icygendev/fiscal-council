@@ -36,8 +36,8 @@ const Header = () => {
     },
     { name: "Новини", path: "/news" },
     { name: "Доклади", path: "/reports" },
+    { name: "Публикации", path: "/publications" },
     { name: "Нормативна база", path: "/regulatory-framework" },
-    { name: "Полезни връзки", path: "/useful-links" },
     { name: "Контакти", path: "/contacts" },
   ];
 

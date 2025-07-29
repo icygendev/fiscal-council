@@ -14,6 +14,7 @@ import History from "./pages/History";
 import News from "./pages/News";
 import Reports from "./pages/Reports";
 import RegulatoryFramework from "./pages/RegulatoryFramework";
+import Publications from "./pages/Publications";
 import UsefulLinks from "./pages/UsefulLinks";
 import Contacts from "./pages/Contacts";
 import NotFound from "./pages/NotFound";
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/history" element={<History />} />
             <Route path="/news" element={<News />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/publications" element={<Publications />} />
             <Route path="/regulatory-framework" element={<RegulatoryFramework />} />
             <Route path="/useful-links" element={<UsefulLinks />} />
             <Route path="/contacts" element={<Contacts />} />

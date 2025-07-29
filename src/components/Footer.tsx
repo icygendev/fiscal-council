@@ -32,33 +32,49 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h3 className="text-lg font-semibold text-primary mb-4">
-              Бързи връзки
+              Полезни връзки
             </h3>
             <div className="space-y-2">
-              <Link 
-                to="/about" 
+              <a 
+                href="https://www.minfin.bg" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                За Фискалния съвет
-              </Link>
-              <Link 
-                to="/reports" 
+                Министерство на финансите
+              </a>
+              <a 
+                href="https://www.parliament.bg" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Доклади и анализи
-              </Link>
-              <Link 
-                to="/news" 
+                Народно събрание
+              </a>
+              <a 
+                href="https://www.bnb.bg" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Новини и съобщения
-              </Link>
-              <Link 
-                to="/contacts" 
+                Българска народна банка
+              </a>
+              <a 
+                href="https://www.nsi.bg" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Свържете се с нас
-              </Link>
+                Национален статистически институт
+              </a>
+              <a 
+                href="https://ec.europa.eu/info/business-economy-euro/economic-and-fiscal-policy-coordination_en" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Европейска комисия - Икономическа политика
+              </a>
             </div>
           </div>
 
