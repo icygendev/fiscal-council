@@ -39,6 +39,7 @@ const Header = () => {
     { name: "Публикации", path: "/publications" },
     { name: "Нормативна база", path: "/regulatory-framework" },
     { name: "Контакти", path: "/contacts" },
+    { name: "Вход", path: "/auth" },
   ];
 
   const isActivePath = (path: string) => {

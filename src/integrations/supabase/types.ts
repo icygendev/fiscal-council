@@ -110,6 +110,57 @@ export type Database = {
         }
         Relationships: []
       }
+      publications: {
+        Row: {
+          content_bg: string | null
+          content_en: string | null
+          created_at: string
+          description_bg: string | null
+          description_en: string | null
+          document_url: string | null
+          featured: boolean
+          id: string
+          publication_type: string
+          published: boolean
+          title_bg: string
+          title_en: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          content_bg?: string | null
+          content_en?: string | null
+          created_at?: string
+          description_bg?: string | null
+          description_en?: string | null
+          document_url?: string | null
+          featured?: boolean
+          id?: string
+          publication_type?: string
+          published?: boolean
+          title_bg: string
+          title_en?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          content_bg?: string | null
+          content_en?: string | null
+          created_at?: string
+          description_bg?: string | null
+          description_en?: string | null
+          document_url?: string | null
+          featured?: boolean
+          id?: string
+          publication_type?: string
+          published?: boolean
+          title_bg?: string
+          title_en?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       reports: {
         Row: {
           created_at: string
