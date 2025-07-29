@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
 import fiscalCouncilLogo from "/lovable-uploads/113eeab5-8568-4061-9f4e-7dfdc2c8eee7.png";
 
@@ -20,8 +23,14 @@ const Header = () => {
       name: "Фискален съвет", 
       subItems: [
         { name: "Мисия и цели", path: "/mission" },
-        { name: "Членове на фискалния съвет", path: "/council-members" },
-        { name: "Експертен съвет", path: "/expert-council" },
+        { 
+          name: "Структура", 
+          path: "/structure",
+          subItems: [
+            { name: "Членове", path: "/council-members" },
+            { name: "Експертен съвет", path: "/expert-council" }
+          ]
+        },
         { name: "История", path: "/history" }
       ]
     },
@@ -39,7 +48,12 @@ const Header = () => {
   };
 
   const isActiveDropdown = (subItems: any[]) => {
-    return subItems.some(item => isActivePath(item.path));
+    return subItems.some(item => {
+      if (item.subItems) {
+        return isActivePath(item.path) || isActiveDropdown(item.subItems);
+      }
+      return isActivePath(item.path);
+    });
   };
 
   return (
@@ -82,16 +96,41 @@ const Header = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="bg-background border border-border shadow-lg z-50">
                     {item.subItems.map((subItem) => (
-                      <DropdownMenuItem key={subItem.path} asChild>
-                        <Link
-                          to={subItem.path}
-                          className={`w-full px-3 py-2 text-sm transition-colors hover:bg-secondary/80 ${
-                            isActivePath(subItem.path) ? "text-primary font-semibold" : "text-foreground"
-                          }`}
-                        >
-                          {subItem.name}
-                        </Link>
-                      </DropdownMenuItem>
+                      subItem.subItems ? (
+                        <DropdownMenuSub key={subItem.name}>
+                          <DropdownMenuSubTrigger className="flex items-center justify-between w-full px-3 py-2 text-sm transition-colors hover:bg-secondary/80">
+                            <span className={isActivePath(subItem.path) ? "text-primary font-semibold" : "text-foreground"}>
+                              {subItem.name}
+                            </span>
+                            <ChevronRight size={14} />
+                          </DropdownMenuSubTrigger>
+                          <DropdownMenuSubContent className="bg-background border border-border shadow-lg">
+                            {subItem.subItems.map((nestedItem) => (
+                              <DropdownMenuItem key={nestedItem.path} asChild>
+                                <Link
+                                  to={nestedItem.path}
+                                  className={`w-full px-3 py-2 text-sm transition-colors hover:bg-secondary/80 ${
+                                    isActivePath(nestedItem.path) ? "text-primary font-semibold" : "text-foreground"
+                                  }`}
+                                >
+                                  {nestedItem.name}
+                                </Link>
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuSubContent>
+                        </DropdownMenuSub>
+                      ) : (
+                        <DropdownMenuItem key={subItem.path} asChild>
+                          <Link
+                            to={subItem.path}
+                            className={`w-full px-3 py-2 text-sm transition-colors hover:bg-secondary/80 ${
+                              isActivePath(subItem.path) ? "text-primary font-semibold" : "text-foreground"
+                            }`}
+                          >
+                            {subItem.name}
+                          </Link>
+                        </DropdownMenuItem>
+                      )
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -130,18 +169,38 @@ const Header = () => {
                 <div key={item.name} className="mb-2">
                   <div className="font-medium text-primary py-2">{item.name}</div>
                   {item.subItems.map((subItem) => (
-                    <Link
-                      key={subItem.path}
-                      to={subItem.path}
-                      className={`block py-2 pl-4 text-sm transition-colors hover:text-primary ${
-                        isActivePath(subItem.path)
-                          ? "text-primary font-semibold"
-                          : "text-foreground"
-                      }`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {subItem.name}
-                    </Link>
+                    subItem.subItems ? (
+                      <div key={subItem.name} className="ml-2 mb-2">
+                        <div className="font-medium text-primary/80 py-1 text-sm">{subItem.name}</div>
+                        {subItem.subItems.map((nestedItem) => (
+                          <Link
+                            key={nestedItem.path}
+                            to={nestedItem.path}
+                            className={`block py-1 pl-6 text-sm transition-colors hover:text-primary ${
+                              isActivePath(nestedItem.path)
+                                ? "text-primary font-semibold"
+                                : "text-foreground"
+                            }`}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {nestedItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      <Link
+                        key={subItem.path}
+                        to={subItem.path}
+                        className={`block py-2 pl-4 text-sm transition-colors hover:text-primary ${
+                          isActivePath(subItem.path)
+                            ? "text-primary font-semibold"
+                            : "text-foreground"
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {subItem.name}
+                      </Link>
+                    )
                   ))}
                 </div>
               ) : (
