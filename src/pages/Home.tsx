@@ -5,19 +5,20 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Shield, BarChart3, FileText, ChevronRight, Calendar, ArrowRight, Users, TrendingUp, Award, Building } from "lucide-react";
 import heroParliament from "@/assets/hero-parliament.jpg";
-import heroBuilding from "@/assets/hero-building.jpg";
-import heroBridge from "@/assets/hero-bridge.jpg";
-import roleTechnology from "@/assets/role-technology.jpg";
-import roleAnalysis from "@/assets/role-analysis.jpg";
+import heroAssembly from "@/assets/hero-assembly.jpg";
+import heroGovernment from "@/assets/hero-government.jpg"; 
+import heroPresidency from "@/assets/hero-presidency.jpg";
+import roleGovernance from "@/assets/role-governance.jpg";
+import roleOversight from "@/assets/role-oversight.jpg";
 import roleProfessional from "@/assets/role-professional.jpg";
 import newsBackground from "@/assets/news-background.jpg";
 
 const Home = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   
-  const heroImages = [heroParliament, heroBuilding, heroBridge];
+  const heroImages = [heroParliament, heroAssembly, heroGovernment, heroPresidency];
   
-  const roleImages = [roleTechnology, roleAnalysis, roleProfessional];
+  const roleImages = [roleGovernance, roleOversight, roleProfessional];
 
   const stats = [
     {
