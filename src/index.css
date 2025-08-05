@@ -17,44 +17,44 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 210 24% 16%;
 
-    /* Steel blue government theme based on #547A95 */
-    --primary: 205 28% 46%;
+    /* Pale green government theme */
+    --primary: 150 25% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 205 28% 36%;
-    --primary-light: 205 28% 56%;
+    --primary-dark: 150 25% 45%;
+    --primary-light: 150 25% 65%;
 
-    --secondary: 205 15% 88%;
-    --secondary-foreground: 205 28% 46%;
+    --secondary: 150 15% 88%;
+    --secondary-foreground: 150 25% 55%;
 
-    --muted: 205 20% 96%;
-    --muted-foreground: 205 16% 46%;
+    --muted: 150 20% 96%;
+    --muted-foreground: 150 16% 46%;
 
-    --accent: 205 15% 88%;
-    --accent-foreground: 205 28% 46%;
+    --accent: 150 15% 88%;
+    --accent-foreground: 150 25% 55%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 205 15% 88%;
-    --input: 205 15% 88%;
-    --ring: 205 28% 46%;
+    --border: 150 15% 88%;
+    --input: 150 15% 88%;
+    --ring: 150 25% 55%;
 
     /* Custom design system colors */
-    --steel-blue: 205 28% 46%;
-    --steel-blue-dark: 205 28% 36%;
-    --steel-blue-light: 205 15% 88%;
-    --steel-blue-accent: 205 35% 65%;
+    --steel-blue: 150 25% 55%;
+    --steel-blue-dark: 150 25% 45%;
+    --steel-blue-light: 150 15% 88%;
+    --steel-blue-accent: 150 35% 65%;
     --warm-gray: 25 10% 55%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(205 28% 46%), hsl(205 28% 36%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(205 15% 96%));
-    --gradient-accent: linear-gradient(135deg, hsl(205 35% 65%), hsl(205 28% 56%));
+    --gradient-hero: linear-gradient(135deg, hsl(150 25% 55%), hsl(150 25% 45%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(150 15% 96%));
+    --gradient-accent: linear-gradient(135deg, hsl(150 35% 65%), hsl(150 25% 65%));
 
     /* Shadows */
-    --shadow-card: 0 4px 6px -1px hsl(205 28% 46% / 0.1), 0 2px 4px -1px hsl(205 28% 46% / 0.06);
-    --shadow-hero: 0 25px 50px -12px hsl(205 28% 46% / 0.25);
-    --shadow-elegant: 0 10px 30px -10px hsl(205 28% 46% / 0.3);
+    --shadow-card: 0 4px 6px -1px hsl(150 25% 55% / 0.1), 0 2px 4px -1px hsl(150 25% 55% / 0.06);
+    --shadow-hero: 0 25px 50px -12px hsl(150 25% 55% / 0.25);
+    --shadow-elegant: 0 10px 30px -10px hsl(150 25% 55% / 0.3);
 
     --radius: 0.5rem;
 
