@@ -89,7 +89,7 @@ const Header = () => {
                 <DropdownMenu key={item.name}>
                   <DropdownMenuTrigger asChild>
                     <button
-                      className={`text-sm font-medium transition-colors hover:text-primary flex items-center space-x-1 ${
+                      className={`text-sm font-medium transition-colors hover:text-primary flex items-center space-x-1 uppercase ${
                         isActiveDropdown(item.subItems)
                           ? "text-primary border-b-2 border-primary pb-1"
                           : "text-foreground"
@@ -143,7 +143,7 @@ const Header = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                  className={`text-sm font-medium transition-colors hover:text-primary uppercase ${
                     isActivePath(item.path)
                       ? "text-primary border-b-2 border-primary pb-1"
                       : "text-foreground"
